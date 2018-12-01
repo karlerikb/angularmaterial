@@ -12,4 +12,9 @@ export class CreateTodoComponent implements OnInit {
   ngOnInit() {
   }
 
+  createNewTodo(formObj, input) {
+    console.log(formObj.value.todoText);
+    input.value = "";
+  }
+
 }
