@@ -1,6 +1,6 @@
 <h1>Create a Todo!</h1>
 
-<form (ngSubmit)="createNewTodo(formObj, todoText)" #formObj="ngForm">
-  <input type="text" name="todoText" placeholder="Write a todo" ngModel #todoText>
+<form (ngSubmit)="createNewTodo(formObj); value=''" #formObj="ngForm">
+  <input type="text" name="todoText" placeholder="Write a todo" [(ngModel)]="value">
   <button type="submit">Add Todo</button>
 </form>

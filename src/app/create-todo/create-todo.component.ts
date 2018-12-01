@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TodoServerService } from '../todo-server.service';
 
 @Component({
   selector: 'app-create-todo',
@@ -7,14 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateTodoComponent implements OnInit {
 
-  constructor() { }
+  constructor(private todoServer: TodoServerService) { }
 
   ngOnInit() {
   }
 
-  createNewTodo(formObj, input) {
-    console.log(formObj.value.todoText);
-    input.value = "";
+  createNewTodo(formObj) {
+    if (formObj.value.todoText) {
+      this.todoServer.addTodos(formObj.value.todoText);
+    }
   }
 
 }
