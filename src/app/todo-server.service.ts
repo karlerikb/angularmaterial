@@ -11,6 +11,7 @@ export class TodoServerService {
 
   constructor() { }
 
+
   addTodos(todoText) {
 
     let id = Math.floor((Math.random()*100000)+1);
@@ -25,4 +26,11 @@ export class TodoServerService {
 
     this.updateTodo.next();
   }
+
+
+  getTodos() {
+    return [...this.todos];
+  }
+
+  
 }
