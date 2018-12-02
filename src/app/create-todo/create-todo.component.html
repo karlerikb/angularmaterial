@@ -2,5 +2,5 @@
 
 <form (ngSubmit)="createNewTodo(formObj); value=''" #formObj="ngForm">
   <input type="text" name="todoText" placeholder="Write a todo" [(ngModel)]="value">
-  <button type="submit">Add Todo</button>
+  <button mat-raised-button color="primary" type="submit">Add Todo</button>
 </form>
