@@ -87,6 +87,60 @@ createNewTodo(formObj) {
 </div>
 ```
 
+### 4.2. Loome service-i todo-de loomise ja kuvamise funktsioonid
+
+1. Ava fail `src/app/todo-server.service.ts`
+2. Lisa impordi rida:
+```typescript
+import { Subject } from 'rxjs';
+```
+3. **Klassi sisse** lisa klassimuutujad:
+```typescript
+private todos = [];
+updateTodo = new Subject();
+```
+4. **Klassi sisse** lisa meetod, mis lisab todo-d massiivi
+```typescript
+addTodos(todoText) {
+
+   let id = Math.floor((Math.random()*100000)+1);
+
+   this.todos.push({
+     id: id,
+     body: todoText,
+     isDone: false
+   });
+
+   console.log(this.todos);
+
+   this.updateTodo.next();
+ }
+```
+5. **Klassi sisse** lisa meetod, mis kuvab kõik todo-d
+```typescript
+getTodos() {
+   return [...this.todos];
+}
+```
+
+### 4.3. Uuendame create-todo komponenti lisades külge service-i
+1. Ava fail `src/app/create-todo/create-todo.component.ts`
+2. Lisa service-i import:
+```typescript
+import { TodoServerService } from '../todo-server.service';
+```
+3. Uuenda konstruktori rida:
+```typescript
+constructor(private todoServer: TodoServerService) { }
+```
+4. Uuenda (asenda) createNewTodo() funktsioon:
+```typescript
+createNewTodo(formObj) {
+   if (formObj.value.todoText) {
+     this.todoServer.addTodos(formObj.value.todoText);
+   }
+ }
+```
 
 
 
