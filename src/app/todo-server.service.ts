@@ -6,7 +6,7 @@ import { Subject } from 'rxjs';
 })
 export class TodoServerService {
 
-  private todo = [];
+  private todos = [];
   updateTodo = new Subject();
 
   constructor() { }
@@ -16,25 +16,25 @@ export class TodoServerService {
 
     let id = Math.floor((Math.random()*100000)+1);
 
-    this.todo.push({
+    this.todos.push({
       id: id,
       body: todoText,
       isDone: false
     });
 
-    console.log(this.todo);
+    console.log(this.todos);
 
     this.updateTodo.next();
   }
 
 
-  getTodo() {
-    return [...this.todo];
+  getTodos() {
+    return [...this.todos];
   }
 
   deleteTodo(todoObj) {
     console.log(todoObj);
-    this.todo = this.todo.filter(todo => todo.id !== todoObj.id);
-    this.updatedTodo.next();
+    this.todos = this.todos.filter(todo => todo.id !== todoObj.id);
+    this.updateTodo.next();
   }
 }

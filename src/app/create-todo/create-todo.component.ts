@@ -15,7 +15,7 @@ export class CreateTodoComponent implements OnInit {
 
   createNewTodo(formObj) {
     if (formObj.value.todoText) {
-      this.todoServer.addTodos(formObj.value.todoText);
+      this.todoServer.addTodo(formObj.value.todoText);
     }
   }
 
