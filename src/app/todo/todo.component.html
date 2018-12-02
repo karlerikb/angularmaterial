@@ -1,5 +1,5 @@
-<div class="todo" [class.done-todo]="todoObj.isDone">
+<mat-card class="todo" [class.done-todo]="todoObj.isDone">
   <p>Todo: {{ todoObj.body }}</p>
   <button (click)="removeTodo()">Delete</button>
   <button (click)="switchDoneFlag()">Done</button>
-</div>
+</mat-card>
