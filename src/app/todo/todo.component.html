@@ -7,6 +7,6 @@
         <mat-chip disabled>{{ todoObj.date }}</mat-chip>
       </mat-chip-list>
       <button mat-button color="warn" (click)="removeTodo()">Delete</button>
-      <button mat-button color="primary" (click)="switchDoneFlag()">Done</button>
+      <mat-slide-toggle color="primary" (click)="switchDoneFlag()">{{ todoObj.isDone ? "Done" : "Not Done" }}</mat-slide-toggle>
 </mat-card-actions>
 </mat-card>
