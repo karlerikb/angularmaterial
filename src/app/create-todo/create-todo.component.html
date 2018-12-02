@@ -5,6 +5,10 @@
 
     <mat-form-field>
       <input matInput type="text" name="todoText" placeholder="Write a todo" [(ngModel)]="value">
+
+      <button mat-button mat-icon-button matSuffix type="button" *ngIf="value" (click)="value=''">
+          <mat-icon>close</mat-icon>
+      </button>
     </mat-form-field>
 
     <br><br>
