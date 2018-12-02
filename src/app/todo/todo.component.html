@@ -8,7 +8,7 @@
       <button mat-mini-fab color="warn" (click)="removeTodo()">
         <mat-icon>close</mat-icon>
       </button>
-      <mat-slide-toggle (click)="switchDoneFlag()">{{ todoObj.isDone ? "Done" : "Not Done" }}</mat-slide-toggle>
+      <mat-slide-toggle color="primary" (click)="switchDoneFlag()">{{ todoObj.isDone ? "Done" : "Not Done" }}</mat-slide-toggle>
     </mat-chip-list>
   </mat-card-actions>
 </mat-card>
