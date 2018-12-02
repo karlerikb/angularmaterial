@@ -6,31 +6,35 @@ import { Subject } from 'rxjs';
 })
 export class TodoServerService {
 
-  private todos = [];
+  private todo = [];
   updateTodo = new Subject();
 
   constructor() { }
 
 
-  addTodos(todoText) {
+  addTodo(todoText) {
 
     let id = Math.floor((Math.random()*100000)+1);
 
-    this.todos.push({
+    this.todo.push({
       id: id,
       body: todoText,
       isDone: false
     });
 
-    console.log(this.todos);
+    console.log(this.todo);
 
     this.updateTodo.next();
   }
 
 
-  getTodos() {
-    return [...this.todos];
+  getTodo() {
+    return [...this.todo];
   }
 
-  
+  deleteTodo(todoObj) {
+    console.log(todoObj);
+    this.todo = this.todo.filter(todo => todo.id !== todoObj.id);
+    this.updatedTodo.next();
+  }
 }

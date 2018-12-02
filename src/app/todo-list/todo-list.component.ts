@@ -15,10 +15,10 @@ export class TodoListComponent implements OnInit {
   constructor(private todoServer: TodoServerService) { }
 
   ngOnInit() {
-    this.todos = this.todoServer.getTodos();
+    this.todo = this.todoServer.getTodo();
     
     this.todoSubscription = this.todoServer.updateTodo.subscribe( () => {
-      this.todos = this.todoServer.getTodos();
+      this.todo = this.todoServer.getTodo();
     });
   }
 
