@@ -1,5 +1,11 @@
 <mat-card class="todo" [class.done-todo]="todoObj.isDone">
-  <p>Todo: {{ todoObj.body }}</p>
-  <button (click)="removeTodo()">Delete</button>
-  <button (click)="switchDoneFlag()">Done</button>
+  <mat-list>
+    <mat-list-item>Todo: {{ todoObj.body }}</mat-list-item> 
+  <mat-list-item>
+      <button (click)="removeTodo()">Delete</button>
+  </mat-list-item> 
+  <mat-list-item>
+      <button (click)="switchDoneFlag()">Done</button>
+  </mat-list-item>
+</mat-list> 
 </mat-card>
