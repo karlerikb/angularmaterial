@@ -12,14 +12,16 @@ export class TodoServerService {
   constructor() { }
 
 
-  addTodo(todoText) {
+  addTodo(todoText, todoDate?) {
 
     let id = Math.floor((Math.random()*100000)+1);
+    let date = todoDate ? todoDate.toDateString() : "";
 
     this.todos.push({
       id: id,
       body: todoText,
-      isDone: false
+      isDone: false,
+      date: date
     });
 
     console.log(this.todos);
@@ -33,7 +35,6 @@ export class TodoServerService {
   }
 
   deleteTodo(todoObj) {
-    //console.log(todoObj);
     this.todos = this.todos.filter(todo => todo.id !== todoObj.id);
     this.updateTodo.next();
   }

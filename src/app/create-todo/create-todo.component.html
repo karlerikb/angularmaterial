@@ -1,7 +1,7 @@
 <div class="new-todo-container">
   <h1>Create a Todo!</h1>
   
-  <form (ngSubmit)="createNewTodo(formObj); value=''" #formObj="ngForm">
+  <form (ngSubmit)="createNewTodo(formObj); value=''; date.value=''" #formObj="ngForm">
 
     <mat-form-field>
       <input matInput type="text" name="todoText" placeholder="Write a todo" [(ngModel)]="value">
@@ -9,6 +9,15 @@
       <button mat-button mat-icon-button matSuffix type="button" *ngIf="value" (click)="value=''">
           <mat-icon>close</mat-icon>
       </button>
+    </mat-form-field>
+
+    <br><br>
+
+    <mat-form-field>
+        <input #date matInput [matDatepicker]="picker" placeholder="Deadline for a Todo" 
+        (dateInput)="addDateEvent($event)" (dateChange)="addDateEvent($event)">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
     <br><br>
