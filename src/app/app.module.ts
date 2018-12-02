@@ -8,7 +8,8 @@ import { TodoComponent } from './todo/todo.component';
 import { FormsModule } from '@angular/forms';
 import { TodoServerService } from './todo-server.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from 'src/material.module';
+import { MaterialModule } from './material.module';
+
 
 
 @NgModule({

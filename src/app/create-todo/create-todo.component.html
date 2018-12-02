@@ -1,6 +1,14 @@
-<h1>Create a Todo!</h1>
+<div class="new-todo-container">
+  <h1>Create a Todo!</h1>
+  
+  <form (ngSubmit)="createNewTodo(formObj); value=''" #formObj="ngForm">
 
-<form (ngSubmit)="createNewTodo(formObj); value=''" #formObj="ngForm">
-  <input type="text" name="todoText" placeholder="Write a todo" [(ngModel)]="value">
-  <button mat-raised-button color="primary" type="submit">Add Todo</button>
-</form>
+    <mat-form-field>
+      <input matInput type="text" name="todoText" placeholder="Write a todo" [(ngModel)]="value">
+    </mat-form-field>
+
+    <br><br>
+    
+    <button mat-raised-button color="primary" type="submit">Add Todo</button>
+  </form>
+</div>
