@@ -1,0 +1,9 @@
+.new-todo-container {
+    width: 900px;
+    margin: 0 auto 100px auto;
+    text-align: center;
+}
+
+mat-form-field {
+    width: 400px;
+}
