@@ -1,3 +1,16 @@
 .done-todo {
     background-color: lightgreen;
 }
+
+mat-card {
+    margin-bottom: 5px;
+}
+
+mat-chip-list {
+    outline: none;
+}
+
+mat-slide-toggle {
+    margin: 10px;
+    color: "primary";
+}
