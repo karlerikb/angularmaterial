@@ -1,4 +1,5 @@
-<div class="todo">
+<div class="todo" [class.done-todo]="todoObj.isdone">
   <p>Todo: {{ todoObj.body }}</p>
+  <button (click)="removeTodo()">Delete</button>
+  <button (click)="switchDoneFlag()">Done</button>
 </div>
-<button (click)="removeTodo()">Delete</button>

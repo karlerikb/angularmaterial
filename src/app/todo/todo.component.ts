@@ -18,4 +18,7 @@ export class TodoComponent implements OnInit {
   removeTodo() {
     this.todoServer.deleteTodo(this.todoObj);
   }
+  switchDoneFlag() {
+    this.todoServer.switchTodoDoneFlag(this.todoObj);
+  }
 }

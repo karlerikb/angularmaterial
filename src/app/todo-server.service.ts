@@ -37,4 +37,13 @@ export class TodoServerService {
     this.todos = this.todos.filter(todo => todo.id !== todoObj.id);
     this.updateTodo.next();
   }
+
+  switchTodoDoneFlag(todoObj) {
+    this.todos.forEach(todo => {
+      if (todo.id === todoObj.id) {
+        todo.isDone = !todo.isDone;
+      }
+    });
+    this.updateTodo.next();
+  }
 }
