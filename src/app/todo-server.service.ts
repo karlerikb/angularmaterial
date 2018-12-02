@@ -33,7 +33,7 @@ export class TodoServerService {
   }
 
   deleteTodo(todoObj) {
-    console.log(todoObj);
+    //console.log(todoObj);
     this.todos = this.todos.filter(todo => todo.id !== todoObj.id);
     this.updateTodo.next();
   }
