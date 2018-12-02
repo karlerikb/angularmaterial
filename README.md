@@ -191,8 +191,81 @@ ngOnDestroy() {
 </div>
 ```
 
+### 4.5. Loome todo komponendi
+1. Ava fail `src/app/todo/todo.component.ts`
+2. Asenda import:
+```typescript
+import { Component, OnInit, Input } from '@angular/core';
+```
+3. **Klassi sees** lisa klassimuutuja:
+```typescript
+@Input() todoObj;
+```
+4. Ava fail `src/app/todo/todo.component.html`
+5. Asenda HTML:
+```html
+<div class="todo">
+ <p>Todo: {{ todoObj.body }}</p>
+</div>
+```
 
-
+### 4.6. Lisame todo-le kustutamise ja tehtuks märkimise funktsionaalsused
+1. Ava fail `src/app/todo-server.service.ts`
+2. **Klassi sees** lisa kustutamise meetod:
+```typescript
+deleteTodo(todoObj) {
+   this.todos = this.todos.filter(todo => todo.id !== todoObj.id);
+   this.updateTodo.next();
+}
+```
+3. **Klassi sees** lisa tehtuks märkimise meetod:
+```typescript
+switchTodoDoneFlag(todoObj) {
+   this.todos.forEach(todo => {
+     if (todo.id === todoObj.id) {
+       todo.isDone = !todo.isDone;
+     }
+   });
+   this.updateTodo.next();
+}
+```
+4. Ava fail `src/app/todo/todo.component.ts`
+5. Lisa import:
+```typescript
+import { TodoServerService } from '../todo-server.service';
+```
+6. **Klassi sees** uuenda konstruktori rida:
+```typescript
+constructor(private todoServer: TodoServerService) { }
+```
+7. **Klassi sees** lisa kustutamise meetod:
+```typescript
+removeTodo() {
+   this.todoServer.deleteTodo(this.todoObj);
+}
+```
+8. **Klassi sees** lisa tehtud märkimise meetod:
+```typescript
+switchDoneFlag() {
+   this.todoServer.switchTodoDoneFlag(this.todoObj);
+}
+```
+9. Ava fail `src/app/todo/todo.component.html`
+10. Kirjuta üle terve fail järgnevaga:
+```html
+<div class="todo" [class.done-todo]="todoObj.isDone">
+ <p>Todo: {{ todoObj.body }}</p>
+ <button (click)="removeTodo()">Delete</button>
+ <button (click)="switchDoneFlag()">Done</button>
+</div>
+```
+11. Ava fail `src/app/todo/todo.component.css`
+12. Lisa styling:
+```css
+.done-todo {
+   background-color: lightgreen;
+}
+```
 
 
 
