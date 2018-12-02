@@ -29,7 +29,7 @@ Lisaks tuleb manuaalselt registreerida viimase käsuga loodud service
 ```typescript
 import { TodoServerService } from './todo-server.service';
 ```
-3. Lisa NgModule decoratorisse providers massivi see loodud TodoServerService
+3. Lisa NgModule decoratorisse providers massivi see loodud TodoServerService:
 ```typescript
 @NgModule({
   ...
@@ -39,4 +39,57 @@ import { TodoServerService } from './todo-server.service';
   ...
 })
 ```
+
+## 4. Loome todo rakenduse funktsionaalsuse
+
+1. Ava fail `src/app/app.component.html`
+2. Kustuta seal olev HTML ja lisa uus:
+```html
+<app-create-todo></app-create-todo>
+<app-todo-list></app-todo-list>
+```
+
+### 4.1 Loome uue todo loomise formi
+1. Ava fail `src/app/app.module.ts`
+2. Lisa rida:
+```typescript
+import { FormsModule } from '@angular/forms';
+```
+3. Lisa NgModule decoratorisse imports massiivi see FormsModule
+```typescript
+@NgModule({
+  ...
+  imports: [
+    FormsModule,
+    ...
+  ],
+  ...
+})
+```
+4. Ava fail `src/app/create-todo/create-todo.component.ts`
+5. Lisa sinna faili **klassi sisse**:
+```typescript
+createNewTodo(formObj) {
+   console.log(formObj.value.todoText);
+}
+```
+5. Ava fail `src/app/create-todo/create-todo.component.html`
+6. Kirjuta üle seal olev järgnevaga:
+```html
+<div class="new-todo-container">
+  <h1>Create a Todo!</h1>
+
+  <form (ngSubmit)="createNewTodo(formObj); value=''" #formObj="ngForm">
+    <input type="text" name="todoText" placeholder="Write a todo" [(ngModel)]="value">
+    
+    <button type="submit">Add Todo</button>
+  </form>
+</div>
+```
+
+
+
+
+
+
 
