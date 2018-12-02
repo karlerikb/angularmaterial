@@ -133,7 +133,7 @@ import { TodoServerService } from '../todo-server.service';
 ```typescript
 constructor(private todoServer: TodoServerService) { }
 ```
-4. Uuenda (asenda) createNewTodo() funktsioon:
+4. Uuenda (asenda) createNewTodo funktsioon:
 ```typescript
 createNewTodo(formObj) {
    if (formObj.value.todoText) {
@@ -141,6 +141,65 @@ createNewTodo(formObj) {
    }
  }
 ```
+
+### 4.4. Loome todo-list komponendi
+1. Ava fail `src/app/todo-list/todo-list.component.ts`
+2. Lisa (asenda) impordid:
+```typescript
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { TodoServerService } from '../todo-server.service';
+```
+3. Klassi defineerimisel lisa implements OnDestroy:
+```typescript
+export class TodoListComponent implements OnInit, OnDestroy {
+...
+}
+```
+4. **Klassi sees** lisa klassimuutujad:
+```typescript
+private todoSubscription = new Subscription();
+todos;
+```
+5. **Klassi sees** uuenda konstruktori rida:
+```typescript
+constructor(private todoServer: TodoServerService) { }
+```
+6. **Klassi sees** muuda ngOnInit meetodit:
+```typescript
+ngOnInit() {
+   this.todos = this.todoServer.getTodos();
+  
+   this.todoSubscription = this.todoServer.updateTodo.subscribe( () => {
+     this.todos = this.todoServer.getTodos();
+   });
+}
+```
+7. **Klassi sees** lisa ngOnDestroy meetod:
+```typescript
+ngOnDestroy() {
+  this.todoSubscription.unsubscribe();
+}
+```
+8. Ava fail `src/app/todo-list/todo-list.component.html`
+9. Asenda sealne HTML:
+```html
+<div class="todo-list-container">
+  <h2>A List of Todos!</h2>
+
+  <app-todo *ngFor="let todo of todos" [todoObj]="todo"></app-todo>
+</div>
+```
+
+
+
+
+
+
+
+
+
+
 
 
 
