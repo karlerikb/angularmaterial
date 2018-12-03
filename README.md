@@ -49,7 +49,7 @@ import { TodoServerService } from './todo-server.service';
 <app-todo-list></app-todo-list>
 ```
 
-### 4.1 Loome uue todo loomise formi
+### 4.1. Loome uue todo loomise formi
 1. Ava fail `src/app/app.module.ts`
 2. Lisa rida:
 ```typescript
@@ -267,10 +267,104 @@ switchDoneFlag() {
 }
 ```
 
+## 5. Paneme külge Materiali
+### 5.1. Installeeri Material lokaalselt
+1. Uues terminali aknas navigeeri `todo` kausta
+2. Sisesta käsk: `npm install --save @angular/material @angular/cdk @angular/animations`
 
+### 5.2. Lisame animatsioonid
+1. Ava fail `src/app/app.module.ts`
+2. Lisa import:
+```typescript
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+```
+3. Lisa NgModule decoratoris imports massiivi see BrowserAnimationsModule
+```typescript
+@NgModule({
+  ...
+  imports: [
+    ...
+    BrowserAnimationsModule
+  ],
+  ...
+})
+```
 
+### 5.3. Teeme uue mooduli Materiali komponentide jaoks
+1. Tee uus fail `src/app` kaustas nimega `material.module.ts`
+2. Lisa sinna kood:
+```typescript
+import { NgModule } from "@angular/core";
 
+@NgModule({
+   imports: [],
+   exports: []
+})
+export class MaterialModule {}
+```
+3. Ava uuesti fail `src/app/app.module.ts`
+4. Lisa import:
+```typescript
+import { MaterialModule } from './material.module';
+```
+5. Lisa NgModule decoratoris imports massiivi see Material Module
+```typescript
+@NgModule({
+  ...
+  imports: [
+    ...
+    MaterialModule
+  ],
+  ...
+})
+```
 
+### 5.4. Lisame Material pre-built theme-i
+1. Ava fail `src/styles.css`
+2. Lisa sinna rida:
+```css
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+```
+
+### 5.5. Lisame gesturite suppordi
+1. Uues terminali aknas navigeeri `todo` kausta
+2. Sisesta käsk: `npm install --save hammerjs`
+3. Ava fail `src/main.ts`
+4. Lisa import:
+```typescript
+import 'hammerjs';
+```
+
+### 5.6. Lisame faviconid
+1. Ava fail `src/index.html`
+2. Lisa `<head>` tagi rida:
+```html
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+```
+
+### 5.7. Testime kas Material läks külge
+1. Ava fail `src/app/material.module.ts`
+2. Lisa import
+```typescript
+import { MatButtonModule } from "@angular/material";
+```
+3. Muuda NgModule decoratorit:
+```typescript
+@NgModule({
+  imports: [
+     MatButtonModule
+  ],
+  exports: [
+     MatButtonModule
+  ]
+})
+```
+4. Ava fail `src/app/create-todo/create-todo.component.html`
+5. Asenda button element uuega:
+```html
+<button mat-raised-button color="primary" type="submit">Add Todo</button>
+```
+6. Kui nupp on nüüd sinist värvi on Material küljes
 
 
 
