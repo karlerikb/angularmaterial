@@ -527,10 +527,13 @@ h2 {
   <button mat-button color="primary" (click)="switchDoneFlag()">Done</button>
 </mat-card-actions>
 ```
-5. `<mat-card-actions>` elemendi sisse lisa veel `<mat-chip-list>` element:
+5. `<mat-card-actions>` elemendi sisse lisa veel `<mat-chip-list>` element ja tõsta `<button>`-id sinna sisse:
 ```html
 <mat-chip-list>
   <mat-chip disabled>{{ todoObj.date }}</mat-chip>
+  
+  <button mat-button color="warn" (click)="removeTodo()">Delete</button>
+  <button mat-button color="primary" (click)="switchDoneFlag()">Done</button>
 </mat-chip-list>
 ```
 6. Asenda Done `<button>` slideriga:
