@@ -493,6 +493,70 @@ mat-form-field {
 }
 ```
 
+### 6.3. Todo list komponent
+1. Ava fail `src/app/todo-list/todo-list.component.css`
+2. Lisa styling:
+```css
+.todo-list-container {
+    width: 900px;
+    margin: 0 auto 100px auto;
+}
+h2 {
+    text-align: center;
+}
+```
+
+### 6.4. Todo komponent
+1. Ava fail `src/app/todo/todo.component.html`
+2. Asenda `<div>` elemendid `<mat-card>` elementidega:
+```html
+<mat-card class="todo" [class.done-todo]="todoObj.isDone">
+  ...
+</mat-card>
+```
+3. `<mat-card>` elemendi sisse tee uus element `<mat-list>` ja eelnev `<p>` element muuda `<mat-list-item>`-iks:
+```html
+<mat-list>
+  <mat-list-item>Todo: {{ todoObj.body }}</mat-list-item>
+</mat-list>
+```
+4. Pärast `<mat-list>` elementi tee uus element `<mat-card-actions>` ja tõsta `<button>` elemendid sinna sisse:
+```html
+<mat-card-actions>
+  <button mat-button color="warn" (click)="removeTodo()">Delete</button>
+  <button mat-button color="primary" (click)="switchDoneFlag()">Done</button>
+</mat-card-actions>
+```
+5. `<mat-card-actions>` elemendi sisse lisa veel `<mat-chip-list>` element:
+```html
+<mat-chip-list>
+  <mat-chip disabled>{{ todoObj.date }}</mat-chip>
+</mat-chip-list>
+```
+6. Asenda Done `<button>` slideriga:
+```html
+<mat-slide-toggle color="primary" (click)="switchDoneFlag()">{{ todoObj.isDone ? "Done" : "Not Done" }}</mat-slide-toggle>
+```
+7. Asenda Delete `<button>` icon buttoniga:
+```html
+<button mat-mini-fab color="warn" (click)="removeTodo()">
+  <mat-icon>close</mat-icon>
+</button>
+```
+8. Ava fail `src/app/todo/todo.component.css`
+9. Lisa styling:
+```css
+mat-card {
+    margin-bottom: 5px;
+}
+ mat-chip-list {
+    outline: none;
+}
+ mat-slide-toggle {
+    margin: 10px;
+}
+```
+
 
 
 
