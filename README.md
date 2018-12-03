@@ -366,6 +366,133 @@ import { MatButtonModule } from "@angular/material";
 ```
 6. Kui nupp on nüüd sinist värvi on Material küljes
 
+## 5.8. Lisame kõik Materiali komponendid mida läheb vaja
+1. Ava fail `src/app/material.module.ts`
+2. Kirjuta eelnev üle järgnevaga:
+```typescript
+import { NgModule } from "@angular/core";
+import { MatButtonModule, MatFormFieldModule, MatInputModule, MatIconModule, MatDatepickerModule, MatNativeDateModule, MatCardModule, MatListModule, MatChipsModule, MatSlideToggleModule } from "@angular/material";
+
+@NgModule({
+   imports: [
+      MatButtonModule,
+      MatFormFieldModule,
+      MatInputModule,
+      MatIconModule,
+      MatDatepickerModule,
+      MatNativeDateModule,
+      MatCardModule,
+      MatListModule,
+      MatChipsModule,
+      MatSlideToggleModule
+   ],
+   exports: [
+      MatButtonModule,
+      MatFormFieldModule,
+      MatInputModule,
+      MatIconModule,
+      MatDatepickerModule,
+      MatNativeDateModule,
+      MatCardModule,
+      MatListModule,
+      MatChipsModule,
+      MatSlideToggleModule
+   ]
+})
+export class MaterialModule {}
+```
+
+## 6. Lisame Materiali komponendid Angulari projektile
+### 6.1. Uue todo loomise formi komponendid
+1. Ava fail `src/app/create-todo/create-todo.component.html`
+2. `<form>` elemendi sisse tekita uus element `<mat-form-field>` ja pane vana `<input>` element sinna sisse:
+```html
+<mat-form-field>
+   <input matInput type="text" name="todoText" placeholder="Write a todo" [(ngModel)]="value">
+</mat-form-field>
+```
+3. Kindlasti lisa **matInput** attribute `<input>` elemendile
+4. Selle `<input>` elemendi alla tekita uus element:
+```html
+<button mat-button mat-icon-button matSuffix type="button" *ngIf="value" (click)="value=''">
+   <mat-icon>close</mat-icon>
+</button>
+```
+
+### 6.2. Lisame formile datepickeri
+#### 6.2.1. Datepickeri kood service-is
+1. Ava fail `src/app/todo-server.service.ts`
+2. Muuda funktsiooni:
+```typescript
+addTodo(todoText, todoDate?) {
+ ...
+ let date = todoDate ? todoDate.toDateString() : "";
+
+ this.todos.push({
+   ...
+   date: date
+ });
+ ...
+}
+```
+Ehk *`todoDate?`* on optional parameeter mille võtame vastu, loome uue *`let date = ...`* muutuja ning anname *`date: date`* objektile juurde
+
+
+#### 6.2.2. Datepickeri kood Angulari komponendis
+1. Ava fail `src/app/create-todo/create-todo.component.ts`
+2. Lisa import:
+```typescript
+import { MatDatepickerInputEvent } from '@angular/material';
+```
+3. **Klassi sees** lisa klassimuutuja:
+```typescript
+todoDate;
+```
+4. **Klassi sees** lisa uus meetod:
+```typescript
+addDateEvent(event: MatDatepickerInputEvent<Date>) {
+  this.todoDate = event.value;
+}
+```
+5. **Klassi sees** muuda CreateNewTodo funktsiooni rida, sisuliselt lisa teine parameeter service-i funktsioonile (*this.todoDate*):
+```typescript
+this.todoServer.addTodo(formObj.value.todoText, this.todoDate);
+```
+
+#### 6.2.3. Datepickeri UI
+1. Ava fail `src/app/create-todo/create-todo.component.html`
+2. Asenda `<form>` elemendi rida uuega:
+```html
+<form (ngSubmit)="createNewTodo(formObj); value=''; date.value=''" #formObj="ngForm">
+```
+3. Eelmise `<mat-form-field>` elemendi alla lisa uus `<mat-form-field>`:
+```html
+<mat-form-field>
+
+</mat-form-field>
+```
+4. Selle sisse kopeeri datepickeri elemendid:
+```html
+<input #date matInput [matDatepicker]="picker" placeholder="Deadline for a Todo" (dateInput)="addDateEvent($event)" (dateChange)="addDateEvent($event)">
+
+<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+<mat-datepicker #picker></mat-datepicker>
+```
+#### 6.2.4. Styling tervele komponendile
+1. Ava fail `src/app/create-todo/create-todo.component.css`
+2. Lisa styling:
+```css
+.new-todo-container {
+   width: 900px;
+   margin: 0 auto 100px auto;
+   text-align: center;
+}
+
+mat-form-field {
+   width: 400px;
+}
+```
+
 
 
 
